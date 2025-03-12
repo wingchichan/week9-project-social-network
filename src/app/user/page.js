@@ -3,6 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { connect } from "@/utilities/connect";
 import UserInfoForm from "../components/UserInfoForm";
+import Menubar from "../components/Menubar";
 
 export default async function CurrentUserPage() {
   const { userId, redirectToSignIn } = await auth();
@@ -27,8 +28,10 @@ export default async function CurrentUserPage() {
 
   return (
     <div>
+      <Menubar />
       <h3>Welcome to your page {userInfo.rows[0].username}!</h3>
       <p>{userInfo.rows[0].bio}</p>
+      <button>Create new post</button>
       <p>Your content should be here</p>
     </div>
   );
