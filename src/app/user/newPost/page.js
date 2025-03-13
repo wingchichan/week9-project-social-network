@@ -1,22 +1,26 @@
 import { connect } from "@/utilities/connect";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function newPostPage() {
   async function handleAddPost(formData) {
     "use server";
     const { content, img_url } = Object.fromEntries(formData);
-    // getting user id from Clerk using auth() function
+    // getting Clerk userId using auth() function
     const { userId } = await auth();
     const db = connect();
-
+    // querying DB to get specific user according to the Clerk id
+    // userInfo will then have an object of data
     const userInfo = await db.query(`SELECT * FROM users WHERE clerk_id = $1`, [
       userId,
     ]);
 
+    // the POSTGRES user id is stored in the rows array in userInfo so using that to insert into the social posts table as that is the foreign key that links the two tables
     await db.query(
       `INSERT INTO social_posts (user_id, content, img_url) VALUES ($1, $2, $3)`,
       [userInfo.rows[0].id, content, img_url]
     );
+    redirect("/user");
   }
 
   return (
