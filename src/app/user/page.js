@@ -28,11 +28,14 @@ export default async function CurrentUserPage() {
 
   return (
     <div>
+      <h1 className="{audiowide.className} uppercase text-3xl font-extrabold ">
+        Encipher
+      </h1>
       <Menubar />
-      <h3>Welcome to your page {userInfo.rows[0].username}!</h3>
+      <h3>Welcome {userInfo.rows[0].username}!</h3>
       <p>{userInfo.rows[0].bio}</p>
       <button>Create new post</button>
-      <p>Your content should be here</p>
+      <p>Previous here</p>
     </div>
   );
 }

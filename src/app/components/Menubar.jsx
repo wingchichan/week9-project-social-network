@@ -7,6 +7,7 @@ import {
   DotFilledIcon,
 } from "@radix-ui/react-icons";
 import styles from "./Menubar.module.css";
+import { redirect } from "next/navigation";
 
 const RADIO_ITEMS = ["Andy", "Benoît", "Luis"];
 const CHECK_ITEMS = ["Always Show Bookmarks Bar", "Always Show Full URLs"];
@@ -17,10 +18,15 @@ export const MenubarDemo = () => {
   ]);
   const [radioSelection, setRadioSelection] = React.useState(RADIO_ITEMS[2]);
 
+  function handleNewPostPage() {
+    console.log("clicked");
+    redirect("/user/newPost");
+  }
+
   return (
     <Menubar.Root className={styles.Root}>
       <Menubar.Menu>
-        <Menubar.Trigger className={styles.Trigger}>File</Menubar.Trigger>
+        <Menubar.Trigger className={styles.Trigger}>Timeline</Menubar.Trigger>
         <Menubar.Portal>
           <Menubar.Content
             className={styles.Content}
@@ -67,9 +73,11 @@ export const MenubarDemo = () => {
       </Menubar.Menu>
 
       <Menubar.Menu>
-        <Menubar.Trigger className={styles.Trigger}>Edit</Menubar.Trigger>
+        <Menubar.Trigger onClick={handleNewPostPage} className={styles.Trigger}>
+          New
+        </Menubar.Trigger>
         <Menubar.Portal>
-          <Menubar.Content
+          {/* <Menubar.Content
             className={styles.Content}
             align="start"
             sideOffset={5}
@@ -111,12 +119,12 @@ export const MenubarDemo = () => {
             <Menubar.Item className={styles.Item}>Cut</Menubar.Item>
             <Menubar.Item className={styles.Item}>Copy</Menubar.Item>
             <Menubar.Item className={styles.Item}>Paste</Menubar.Item>
-          </Menubar.Content>
+          </Menubar.Content> */}
         </Menubar.Portal>
       </Menubar.Menu>
 
       <Menubar.Menu>
-        <Menubar.Trigger className={styles.Trigger}>View</Menubar.Trigger>
+        <Menubar.Trigger className={styles.Trigger}>Favourites</Menubar.Trigger>
         <Menubar.Portal>
           <Menubar.Content
             className={styles.Content}
@@ -163,7 +171,7 @@ export const MenubarDemo = () => {
       </Menubar.Menu>
 
       <Menubar.Menu>
-        <Menubar.Trigger className={styles.Trigger}>Profiles</Menubar.Trigger>
+        <Menubar.Trigger className={styles.Trigger}>Edit</Menubar.Trigger>
         <Menubar.Portal>
           <Menubar.Content
             className={styles.Content}
