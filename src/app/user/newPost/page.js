@@ -1,4 +1,24 @@
-export default function newPostPage() {
+import { connect } from "@/utilities/connect";
+import { auth } from "@clerk/nextjs/server";
+
+export default async function newPostPage() {
+  async function handleAddPost(formData) {
+    "use server";
+    const { content, img_url } = Object.fromEntries(formData);
+    // getting user id from Clerk using auth() function
+    const { userId } = await auth();
+    const db = connect();
+
+    const userInfo = await db.query(`SELECT * FROM users WHERE clerk_id = $1`, [
+      userId,
+    ]);
+
+    await db.query(
+      `INSERT INTO social_posts (user_id, content, img_url) VALUES ($1, $2, $3)`,
+      [userInfo.rows[0].id, content, img_url]
+    );
+  }
+
   return (
     <div className="m-5">
       <h1 className="{audiowide.className} uppercase text-3xl font-extrabold ">
@@ -6,16 +26,22 @@ export default function newPostPage() {
       </h1>
       <div className="pt-10 flex flex-col gap-5">
         <p>Create new post</p>
-        <form>
-          <label htmlFor="New Post"></label>
+        <form className="flex flex-col gap-2" action={handleAddPost}>
+          <label htmlFor="New Post">New Post</label>
           <textarea
             id="content"
             name="content"
             placeholder="Content"
             type="text"
             required
-            className="w-full"
+            className="w-full h-40"
           ></textarea>
+
+          <label className="mt-5" htmlFor="image">
+            Image URL (optional)
+          </label>
+          <input id="image" name="image" placeholder="Image URL" type="text" />
+          <button className="text-end pt-2 border-solid">Add</button>
         </form>
       </div>
     </div>

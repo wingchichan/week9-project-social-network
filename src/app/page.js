@@ -11,10 +11,9 @@ const audiowide = Audiowide({
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="{audiowide.className} uppercase text-6xl font-extrabold">
-        Encipher
-      </h1>
+    <div className="{audiowide.className} text-center mt-40">
+      <h1 className=" uppercase text-6xl font-extrabold">Encipher</h1>
+      <p className="text-2xl font-light">Connect over code</p>
     </div>
   );
 }

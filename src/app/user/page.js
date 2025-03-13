@@ -6,6 +6,7 @@ import UserInfoForm from "../components/UserInfoForm";
 import Menubar from "../components/Menubar";
 
 export default async function CurrentUserPage() {
+  // getting authenticated user's info
   const { userId, redirectToSignIn } = await auth();
   const db = connect();
 
@@ -13,6 +14,7 @@ export default async function CurrentUserPage() {
   const userInfo = await db.query(`SELECT * FROM users WHERE clerk_id = $1`, [
     userId,
   ]);
+  console.log(userInfo);
 
   // if no user id in database redirect to sign in
   if (!userId) return redirectToSignIn();
@@ -27,15 +29,16 @@ export default async function CurrentUserPage() {
   }
 
   return (
-    <div>
+    <div className="m-5">
       <h1 className="{audiowide.className} uppercase text-3xl font-extrabold ">
         Encipher
       </h1>
       <Menubar />
-      <h3>Welcome {userInfo.rows[0].username}!</h3>
-      <p>{userInfo.rows[0].bio}</p>
-      <button>Create new post</button>
-      <p>Previous here</p>
+      <h3 className="mt-5 text-2xl">Welcome {userInfo.rows[0].username}!</h3>
+      <p className="mt-3 italic text-cyan-950">{userInfo.rows[0].bio}</p>
+      <section>
+        <p>Previous posts here</p>
+      </section>
     </div>
   );
 }
