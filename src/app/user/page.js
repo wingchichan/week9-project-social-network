@@ -3,7 +3,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { connect } from "@/utilities/connect";
 import UserInfoForm from "../components/UserInfoForm";
-import Menubar from "../components/Menubar";
 import Image from "next/image";
 import DeleteButton from "../components/DeleteButton";
 import { revalidatePath } from "next/cache";
@@ -53,34 +52,27 @@ export default async function CurrentUserPage() {
   }
 
   return (
-    <div className="m-5">
-      <section className="flex flex-row justify-between">
-        <h1 className="{audiowide.className} uppercase text-3xl font-extrabold mb-5">
-          Encipher
-        </h1>
-        <Menubar />
-      </section>
-
-      <h3 className="mt-5 text-2xl">Welcome {userInfo.rows[0].username}!</h3>
-      <p className="mt-3 italic text-cyan-950">{userInfo.rows[0].bio}</p>
-      <section>
-        <p>Previous posts here</p>
+    <div className="m-5 md:mx-0">
+      <div className="bg-neutral-100 p-4 rounded-lg mb-4">
+        <h3 className="text-2xl">Welcome {userInfo.rows[0].username}!</h3>
+        <p className="mt-3 italic text-cyan-950">{userInfo.rows[0].bio}</p>
+      </div>
+      <section className="rounded-lg overflow-clip">
         {posts.map((post) => (
-          <div
-            key={post.id}
-            className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900/50 dark:even:bg-gray-950"
-          >
-            <p>{post.content}</p>
+          <div key={post.id} className="odd:bg-white even:bg-gray-50 p-4">
+            <p className="mb-4">{post.content}</p>
             {/* conditional rendering only if img url has a value */}
             {post.img_url && (
               <Image
                 alt={post.content}
                 src={post.img_url}
-                width={100}
-                height={100}
+                width={250}
+                height={250}
               />
             )}
-            <DeleteButton deleteFunction={handleDelete} id={post.id} />
+            <div className="flex flex-row justify-end">
+              <DeleteButton deleteFunction={handleDelete} id={post.id} />
+            </div>
           </div>
         ))}
       </section>
