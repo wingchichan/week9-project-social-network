@@ -1,25 +1,28 @@
 .Root {
   display: flex;
-  background-color: white;
+  /* background-color: white; */
   padding: 3px;
   border-radius: 6px;
-  box-shadow: 0 2px 10px var(--black-a7);
+  width: fit-content;
+  height: fit-content;
 }
 
 .Trigger {
   all: unset;
-  padding: 8px 12px;
+  padding: 8px 15px;
   outline: none;
   user-select: none;
   font-weight: 500;
   line-height: 1;
   border-radius: 4px;
-  color: var(--violet-11);
-  font-size: 13px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2px;
+}
+
+.Trigger:hover {
+  background-color: skyblue;
 }
 
 .Trigger[data-highlighted],

@@ -5,6 +5,8 @@ import { connect } from "@/utilities/connect";
 import UserInfoForm from "../components/UserInfoForm";
 import Menubar from "../components/Menubar";
 import Image from "next/image";
+import DeleteButton from "../components/DeleteButton";
+import { revalidatePath } from "next/cache";
 
 export default async function CurrentUserPage() {
   // getting authenticated user's info using Clerk's auth() function
@@ -30,6 +32,14 @@ export default async function CurrentUserPage() {
   const posts = userPosts.rows;
   // console.log(posts);
 
+  async function handleDelete(id) {
+    "use server";
+    const db = connect();
+    console.log("delete");
+    await db.query(`DELETE FROM social_posts WHERE id = $1`, [id]);
+    revalidatePath("/user");
+  }
+
   // if no user id in our DB, redirect to sign in
   if (!userId) return redirectToSignIn();
 
@@ -44,23 +54,33 @@ export default async function CurrentUserPage() {
 
   return (
     <div className="m-5">
-      <h1 className="{audiowide.className} uppercase text-3xl font-extrabold mb-5">
-        Encipher
-      </h1>
-      <Menubar />
+      <section className="flex flex-row justify-between">
+        <h1 className="{audiowide.className} uppercase text-3xl font-extrabold mb-5">
+          Encipher
+        </h1>
+        <Menubar />
+      </section>
+
       <h3 className="mt-5 text-2xl">Welcome {userInfo.rows[0].username}!</h3>
       <p className="mt-3 italic text-cyan-950">{userInfo.rows[0].bio}</p>
       <section>
         <p>Previous posts here</p>
         {posts.map((post) => (
-          <div key={post.id}>
+          <div
+            key={post.id}
+            className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900/50 dark:even:bg-gray-950"
+          >
             <p>{post.content}</p>
-            <Image
-              alt={post.content}
-              src={post.img_url}
-              width={100}
-              height={100}
-            />
+            {/* conditional rendering only if img url has a value */}
+            {post.img_url && (
+              <Image
+                alt={post.content}
+                src={post.img_url}
+                width={100}
+                height={100}
+              />
+            )}
+            <DeleteButton deleteFunction={handleDelete} id={post.id} />
           </div>
         ))}
       </section>

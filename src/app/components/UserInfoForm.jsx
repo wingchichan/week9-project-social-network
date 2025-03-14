@@ -1,4 +1,3 @@
-import pg from "pg";
 import { auth } from "@clerk/nextjs/server";
 import { connect } from "@/utilities/connect";
 import { redirect } from "next/navigation";

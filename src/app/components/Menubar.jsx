@@ -23,9 +23,14 @@ export const MenubarDemo = () => {
     redirect("/user/newPost");
   }
 
+  function handleEditBioPage() {
+    redirect("/user/editBio");
+  }
+
   return (
     <Menubar.Root className={styles.Root}>
       <Menubar.Menu>
+        {/* TIMELINE */}
         <Menubar.Trigger className={styles.Trigger}>Timeline</Menubar.Trigger>
         <Menubar.Portal>
           <Menubar.Content
@@ -73,58 +78,15 @@ export const MenubarDemo = () => {
       </Menubar.Menu>
 
       <Menubar.Menu>
+        {/* NEW */}
         <Menubar.Trigger onClick={handleNewPostPage} className={styles.Trigger}>
           New
         </Menubar.Trigger>
-        <Menubar.Portal>
-          {/* <Menubar.Content
-            className={styles.Content}
-            align="start"
-            sideOffset={5}
-            alignOffset={-3}
-          >
-            <Menubar.Item className={styles.Item}>
-              Undo <div className={styles.RightSlot}>⌘ Z</div>
-            </Menubar.Item>
-            <Menubar.Item className={styles.Item}>
-              Redo <div className={styles.RightSlot}>⇧ ⌘ Z</div>
-            </Menubar.Item>
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Sub>
-              <Menubar.SubTrigger className={styles.SubTrigger}>
-                Find
-                <div className={styles.RightSlot}>
-                  <ChevronRightIcon />
-                </div>
-              </Menubar.SubTrigger>
-
-              <Menubar.Portal>
-                <Menubar.SubContent
-                  className={styles.SubContent}
-                  alignOffset={-5}
-                >
-                  <Menubar.Item className={styles.Item}>
-                    Search the web…
-                  </Menubar.Item>
-                  <Menubar.Separator className={styles.Separator} />
-                  <Menubar.Item className={styles.Item}>Find…</Menubar.Item>
-                  <Menubar.Item className={styles.Item}>Find Next</Menubar.Item>
-                  <Menubar.Item className={styles.Item}>
-                    Find Previous
-                  </Menubar.Item>
-                </Menubar.SubContent>
-              </Menubar.Portal>
-            </Menubar.Sub>
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Item className={styles.Item}>Cut</Menubar.Item>
-            <Menubar.Item className={styles.Item}>Copy</Menubar.Item>
-            <Menubar.Item className={styles.Item}>Paste</Menubar.Item>
-          </Menubar.Content> */}
-        </Menubar.Portal>
       </Menubar.Menu>
 
       <Menubar.Menu>
-        <Menubar.Trigger className={styles.Trigger}>Favourites</Menubar.Trigger>
+        {/* FRIENDS */}
+        <Menubar.Trigger className={styles.Trigger}>Friends</Menubar.Trigger>
         <Menubar.Portal>
           <Menubar.Content
             className={styles.Content}
@@ -171,9 +133,12 @@ export const MenubarDemo = () => {
       </Menubar.Menu>
 
       <Menubar.Menu>
-        <Menubar.Trigger className={styles.Trigger}>Edit</Menubar.Trigger>
+        {/* EDIT */}
+        <Menubar.Trigger onClick={handleEditBioPage} className={styles.Trigger}>
+          Edit
+        </Menubar.Trigger>
         <Menubar.Portal>
-          <Menubar.Content
+          {/* <Menubar.Content
             className={styles.Content}
             align="start"
             sideOffset={5}
@@ -204,7 +169,7 @@ export const MenubarDemo = () => {
                 Add Profile…
               </Menubar.Item>
             </Menubar.RadioGroup>
-          </Menubar.Content>
+          </Menubar.Content> */}
         </Menubar.Portal>
       </Menubar.Menu>
     </Menubar.Root>

@@ -25,5 +25,13 @@ body {
 } */
 
 body {
-  background-color: rgb(42, 140, 165);
+  background-color: hsl(0, 0%, 90%);
 }
+
+/* @media (min-width: 1050px) {
+  main {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+} */

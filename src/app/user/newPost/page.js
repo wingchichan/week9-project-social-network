@@ -44,7 +44,12 @@ export default async function newPostPage() {
           <label className="mt-5" htmlFor="image">
             Image URL (optional)
           </label>
-          <input id="image" name="image" placeholder="Image URL" type="text" />
+          <input
+            id="image"
+            name="img_url"
+            placeholder="Image URL"
+            type="text"
+          />
           <button className="text-end pt-2 border-solid">Add</button>
         </form>
       </div>
