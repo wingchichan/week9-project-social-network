@@ -19,62 +19,27 @@ export const MenubarDemo = () => {
   const [radioSelection, setRadioSelection] = React.useState(RADIO_ITEMS[2]);
 
   function handleNewPostPage() {
-    console.log("clicked");
     redirect("/user/newPost");
   }
 
-  function handleEditBioPage() {
-    redirect("/user/editBio");
+  function handleProfilePage() {
+    redirect("/user");
+  }
+
+  function handleTimelinePage() {
+    redirect("/timeline");
   }
 
   return (
     <Menubar.Root className={styles.Root}>
       <Menubar.Menu>
         {/* TIMELINE */}
-        <Menubar.Trigger className={styles.Trigger}>Timeline</Menubar.Trigger>
-        <Menubar.Portal>
-          <Menubar.Content
-            className={styles.Content}
-            align="start"
-            sideOffset={5}
-            alignOffset={-3}
-          >
-            <Menubar.Item className={styles.Item}>
-              New Tab <div className={styles.RightSlot}>⌘ T</div>
-            </Menubar.Item>
-            <Menubar.Item className={styles.Item}>
-              New Window <div className={styles.RightSlot}>⌘ N</div>
-            </Menubar.Item>
-            <Menubar.Item className={styles.Item} disabled>
-              New Incognito Window
-            </Menubar.Item>
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Sub>
-              <Menubar.SubTrigger className={styles.SubTrigger}>
-                Share
-                <div className={styles.RightSlot}>
-                  <ChevronRightIcon />
-                </div>
-              </Menubar.SubTrigger>
-              <Menubar.Portal>
-                <Menubar.SubContent
-                  className={styles.SubContent}
-                  alignOffset={-5}
-                >
-                  <Menubar.Item className={styles.Item}>
-                    Email Link
-                  </Menubar.Item>
-                  <Menubar.Item className={styles.Item}>Messages</Menubar.Item>
-                  <Menubar.Item className={styles.Item}>Notes</Menubar.Item>
-                </Menubar.SubContent>
-              </Menubar.Portal>
-            </Menubar.Sub>
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Item className={styles.Item}>
-              Print… <div className={styles.RightSlot}>⌘ P</div>
-            </Menubar.Item>
-          </Menubar.Content>
-        </Menubar.Portal>
+        <Menubar.Trigger
+          onClick={handleTimelinePage}
+          className={styles.Trigger}
+        >
+          Timeline
+        </Menubar.Trigger>
       </Menubar.Menu>
 
       <Menubar.Menu>
@@ -87,55 +52,12 @@ export const MenubarDemo = () => {
       <Menubar.Menu>
         {/* FRIENDS */}
         <Menubar.Trigger className={styles.Trigger}>Friends</Menubar.Trigger>
-        <Menubar.Portal>
-          <Menubar.Content
-            className={styles.Content}
-            align="start"
-            sideOffset={5}
-            alignOffset={-14}
-          >
-            {CHECK_ITEMS.map((item) => (
-              <Menubar.CheckboxItem
-                className={`${styles.CheckboxItem} inset`}
-                key={item}
-                checked={checkedSelection.includes(item)}
-                onCheckedChange={() =>
-                  setCheckedSelection((current) =>
-                    current.includes(item)
-                      ? current.filter((el) => el !== item)
-                      : current.concat(item)
-                  )
-                }
-              >
-                <Menubar.ItemIndicator className={styles.ItemIndicator}>
-                  <CheckIcon />
-                </Menubar.ItemIndicator>
-                {item}
-              </Menubar.CheckboxItem>
-            ))}
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Item className={`${styles.Item} inset`}>
-              Reload <div className={styles.RightSlot}>⌘ R</div>
-            </Menubar.Item>
-            <Menubar.Item className={`${styles.Item} inset`} disabled>
-              Force Reload <div className={styles.RightSlot}>⇧ ⌘ R</div>
-            </Menubar.Item>
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Item className={`${styles.Item} inset`}>
-              Toggle Fullscreen
-            </Menubar.Item>
-            <Menubar.Separator className={styles.Separator} />
-            <Menubar.Item className={`${styles.Item} inset`}>
-              Hide Sidebar
-            </Menubar.Item>
-          </Menubar.Content>
-        </Menubar.Portal>
       </Menubar.Menu>
 
       <Menubar.Menu>
-        {/* EDIT */}
-        <Menubar.Trigger onClick={handleEditBioPage} className={styles.Trigger}>
-          Edit
+        {/* PROFILE */}
+        <Menubar.Trigger onClick={handleProfilePage} className={styles.Trigger}>
+          Profile
         </Menubar.Trigger>
         <Menubar.Portal>
           {/* <Menubar.Content

@@ -20,6 +20,8 @@ export default async function CurrentUserPage() {
   ]);
   // console.log(userInfo);
 
+  if (userInfo.rowCount == 0) return <UserInfoForm />;
+
   // querying DB for any posts that are associated with the user id we got from userInfo
   const userPosts = await db.query(
     `SELECT * FROM social_posts WHERE user_id = $1 ORDER BY id DESC`,

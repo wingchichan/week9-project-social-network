@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className="p-4">
-          <header className="border-b-[1px] border-neutral-300 border-dashed max-w-5xl mx-auto">
+          <header className="max-w-5xl mx-auto">
             <SignedIn>
               <section className="flex flex-col w-full justify-between">
                 <h1 className="{audiowide.className} uppercase text-3xl font-extrabold mb-4 text-center md:text-left">
